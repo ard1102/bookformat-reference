@@ -1,0 +1,17 @@
+[project]
+name = "bookformat-reference"
+version = "0.1.0"
+description = "Reference implementation of the BookFormat Documentation Enforcement Protocol"
+readme = "README.md"
+requires-python = ">=3.8"
+dependencies = [
+    "ruff",
+    "semgrep",
+    "pytest"
+]
+
+[tool.ruff]
+line-length = 120
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

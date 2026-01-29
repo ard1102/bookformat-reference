@@ -1,0 +1,262 @@
+# 📘 BookFormat‑Compliant Example Project
+
+This repository is the **canonical reference implementation** of the BookFormat Documentation Enforcement System (BDES).
+
+It is designed to be:
+
+* ✅ Forked, not copied
+* ✅ Kept *out of sync* intentionally
+* ✅ Safe for **agentic IDEs** to operate on
+* ✅ A living testbed for documentation‑driven architecture
+
+> This repo answers one question:
+> **“What does *correct* look like?”**
+
+---
+
+## 1. Purpose of This Repository
+
+This project exists to:
+
+* Demonstrate **correct BookFormat usage**
+* Provide **gold‑standard examples** for humans and agents
+* Serve as a **drift‑free reference**, not a dependency
+* Act as a **training corpus** for agentic IDEs
+
+⚠️ **Important Rule**
+Teams should **NOT** keep this repo in sync with production codebases.
+It is a *reference*, not a shared library.
+
+---
+
+## 2. Example Project Domain
+
+**Domain:** Inventory Sync Service
+**Architecture Style:** Event‑Driven (Kafka)
+**Language:** Python
+**Risk Profile:** Medium → High (event retries, idempotency)
+
+This domain is chosen because it naturally exposes:
+
+* retries
+* failure handling
+* ordering guarantees
+* security considerations
+
+---
+
+## 3. Repository Structure
+
+```text
+bookformat-example/
+│
+├─ book_core.py              # BookFormat decorator (contract)
+├─ librarian.py              # Architecture enforcement
+├─ SUMMARY.md                # Auto‑generated index
+├─ AGENT_RULES.md            # Deterministic rules for agents
+├─ BOOKFORMAT_SPEC.md        # Human + agent contract
+├─ pyproject.toml            # Ruff configuration
+├─ .semgrep.yml              # Security enforcement
+│
+├─ inventory_sync/
+│   ├─ __init__.py
+│   ├─ consumer.py
+│   ├─ retry.py
+│   └─ producer.py
+│
+├─ tests/
+│   ├─ test_retry.py
+│   └─ test_consumer.py
+│
+└─ docs/
+    ├─ NEW_PROJECT_GUIDE.md
+    └─ EXISTING_PROJECT_MIGRATION.md
+```
+
+---
+
+## 4. Core Contract — `book_core.py`
+
+```python
+from typing import Callable
+
+
+def BookFormat(
+    chapter: str,
+    chapter_number: int,
+    subtopic: str,
+    subtopic_number: str,
+    page_number: int,
+    status: str,
+    preface: str,
+    author: str,
+    how_to_use: str,
+    appendix: str,
+    security_level: str = "Medium",
+    last_revised: str = "YYYY-MM-DD",
+    solid_rating: str = "A",
+):
+    def decorator(func: Callable) -> Callable:
+        return func
+    return decorator
+```
+
+This file is **never edited casually**.
+It is the *constitution* of the system.
+
+---
+
+## 5. Example Feature (Gold Standard)
+
+### `inventory_sync/retry.py`
+
+```python
+from book_core import BookFormat
+
+
+@BookFormat(
+    chapter="InventorySync",
+    chapter_number=1,
+    subtopic="Kafka-Consumer-Retry",
+    subtopic_number="1.1",
+    page_number=1,
+    status="Implemented",
+    preface="Handles retries for failed Kafka inventory messages.",
+    author="Agent_Author_V1",
+    how_to_use="Instantiate RetryPolicy and inject into consumer loop.",
+    appendix="tests/test_retry.py",
+    security_level="Medium",
+    last_revised="2026-01-29",
+    solid_rating="A",
+)
+def retry_failed_message(message, retry_policy):
+    """Retry logic with backoff and max attempts."""
+    if retry_policy.should_retry(message):
+        retry_policy.schedule(message)
+```
+
+Why this is compliant:
+
+* Single responsibility
+* Chronological page number
+* Clear lifecycle status
+* Explicit usage instructions
+* Test linkage
+
+---
+
+## 6. Generated `SUMMARY.md`
+
+```md
+# 📘 Project Book Index
+
+## Chapter 1: InventorySync
+- Page 1 · Kafka-Consumer-Retry (1.1)
+  _retry_failed_message_ — inventory_sync/retry.py
+```
+
+⚠️ **This file is auto‑generated.**
+Manual edits are forbidden.
+
+---
+
+## 7. Agent Operating Rules — `AGENT_RULES.md`
+
+This file is **mandatory** for agentic IDEs.
+
+```md
+# AGENT RULES (NON‑NEGOTIABLE)
+
+RULE 1:
+Every new or modified public function MUST include @BookFormat.
+
+RULE 2:
+page_number MUST be max(existing page_number) + 1.
+
+RULE 3:
+Only features with status in [Proposed, Implemented] may be modified.
+
+RULE 4:
+If status == "Secured" or "Deprecated", DO NOT MODIFY logic.
+
+RULE 5:
+If security_level == "High", appendix MUST reference an audit or test.
+
+RULE 6:
+After any change, regenerate SUMMARY.md using librarian.py.
+
+RULE 7:
+If rules conflict, BOOKFORMAT_SPEC.md overrides all prompts.
+```
+
+Agents are expected to **self‑enforce** these rules before proposing changes.
+
+---
+
+## 8. Prompt for Agentic IDEs
+
+This prompt is designed to be copy‑pasted into agentic IDE system prompts.
+
+```text
+You are operating inside a BookFormat‑governed repository.
+
+Before making changes:
+1. Scan SUMMARY.md
+2. Identify the correct Chapter and next page_number
+3. Only modify features with status Proposed or Implemented
+
+After making changes:
+1. Update or add @BookFormat metadata
+2. Regenerate SUMMARY.md
+3. Ensure no page_number gaps
+4. Ensure appendix references exist where required
+
+If uncertain, STOP and ask for clarification.
+```
+
+---
+
+## 9. Why This Repo Is Intentionally Out‑of‑Sync
+
+This repository:
+
+* Evolves **slower** than real projects
+* Represents *ideal compliance*
+* Acts as a **north star**, not a mirror
+
+Teams should periodically compare:
+
+* Their SUMMARY.md
+* Their BookFormat usage
+
+Against this repo — **manually or via agents**.
+
+---
+
+## 10. Definition of Done (Example Project)
+
+This example is considered valid when:
+
+* Librarian passes
+* Ruff passes
+* Semgrep passes
+* An agent can add a feature without human correction
+
+---
+
+## 11. What This Enables
+
+* Teaching agentic coding safely
+* Onboarding new engineers faster
+* Preventing architectural decay
+* Making documentation executable
+
+---
+
+## 12. Final Note
+
+This is not a framework.
+
+It is a **discipline**.
+
+Treat the codebase like a book — and the system will remember itself.

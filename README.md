@@ -25,11 +25,13 @@ This repository is a **Reference Implementation**. You are meant to **Fork** or 
 
 ```text
 .
+├── .bpolicy/               # 🤖 Agent Policy & Governance Docs
+│   ├── AGENT_RULES.md      # Rules for Agents
+│   ├── AGENT_WORKFLOW.md   # The 9-Step Process
+│   ├── BOOKFORMAT_SPEC.md  # The Protocol Spec
+│   └── ...
 ├── book_core.py            # The @BookFormat decorator (The Contract)
 ├── librarian.py            # The Enforcer (Generates Index & Graph)
-├── BOOKFORMAT_SPEC.md      # The Constitution (Rules for Humans & Agents)
-├── AGENT_WORKFLOW.md       # Instructions for your AI Agent
-├── PRODUCTION_STANDARDS.md # SOLID/SDLC Quality Gates
 └── SUMMARY.md              # The Auto-Generated Index
 ```
 
@@ -44,11 +46,12 @@ This repository is a **Reference Implementation**. You are meant to **Fork** or 
 4.  Start coding!
 
 ### Option B: Add to Existing Repo
-1.  Copy `book_core.py`, `librarian.py`, and the `*.md` specs to your root.
-2.  Add `@BookFormat` to your critical entry points.
-3.  Run `python librarian.py` to generate your first graph.
+1.  Copy `book_core.py` and `librarian.py` to your root.
+2.  Copy the `.bpolicy/` folder to your root.
+3.  Add `@BookFormat` to your critical entry points.
+4.  Run `python librarian.py` to generate your first graph.
 
-See [HOW_TO_ADOPT.md](HOW_TO_ADOPT.md) for a detailed migration guide.
+See [.bpolicy/HOW_TO_ADOPT.md](.bpolicy/HOW_TO_ADOPT.md) for a detailed migration guide.
 
 ---
 
@@ -77,4 +80,4 @@ See [HOW_TO_ADOPT.md](HOW_TO_ADOPT.md) for a detailed migration guide.
 2.  **Linear History**: Pages are chronological (`page_number`).
 3.  **Explicit Edges**: Dependencies must be declared in `references`.
 
-*Read [BOOKFORMAT_SPEC.md](BOOKFORMAT_SPEC.md) for the full protocol.*
+*Read [.bpolicy/BOOKFORMAT_SPEC.md](.bpolicy/BOOKFORMAT_SPEC.md) for the full protocol.*

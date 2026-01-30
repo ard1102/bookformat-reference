@@ -71,15 +71,20 @@ Add the contents of `AGENT_RULES.md` and `AGENT_WORKFLOW.md` to your Agent's "Cu
 
 ## 📦 CI/CD Integration
 
-To enforce the protocol, add a check to your GitHub Actions / GitLab CI:
+To enforce the protocol, add a check to your GitHub Actions / GitLab CI. The Librarian is now **CI-Ready** and will exit with code 1 if it finds:
+*   Broken References
+*   Duplicate Page Numbers
+*   Missing Mandatory Fields
+*   Syntax Errors
 
 ```yaml
 steps:
-  - name: Run Librarian
+  - name: Run Librarian (Quality Gate)
     run: python librarian.py
-    
+    # Fails immediately if docs are broken
+
   - name: Check for Uncommitted Changes
     run: |
       git diff --exit-code SUMMARY.md SYSTEM_GRAPH.md
-      # If this fails, it means the developer didn't run the Librarian.
+      # If this fails, it means the developer didn't commit the updated index.
 ```

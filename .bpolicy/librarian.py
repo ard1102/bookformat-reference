@@ -2,9 +2,8 @@ import ast
 import os
 import re
 import sys
-import subprocess
 from datetime import datetime
-from typing import Dict, List, Optional
+from typing import Dict, List
 
 # --- Configuration ---
 PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__))) # Root is one level up now
@@ -127,7 +126,8 @@ class Librarian:
         chapters = {}
         for entry in self.entries:
             ch = entry.chapter
-            if ch not in chapters: chapters[ch] = []
+            if ch not in chapters: 
+                chapters[ch] = []
             chapters[ch].append(entry)
 
         # Sort Chapters (Foundations first, then alphabetical or by number)
@@ -201,7 +201,7 @@ class Librarian:
         with open(GRAPH_FILE, "w", encoding="utf-8") as f:
             f.write("\n".join(lines))
         
-        print(f"✅ SYSTEM_GRAPH.md generated with dependency visualization.")
+        print("✅ SYSTEM_GRAPH.md generated with dependency visualization.")
         return True
 
     def hydrate_codebase(self):
@@ -214,14 +214,11 @@ class Librarian:
         # We assign new page numbers to entries that lack them.
         next_page = self.max_page_number + 1
         
-        files_modified = set()
-        
         for entry in self.entries:
             if entry.page_number is None:
                 # Calculate new fields
                 new_page = next_page
                 next_page += 1
-                new_date = datetime.now().strftime("%Y-%m-%d")
                 
                 print(f"💧 Hydrating {entry.key} -> Page {new_page}")
                 

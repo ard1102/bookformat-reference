@@ -1,4 +1,4 @@
-from typing import Callable, List, Optional, Union
+from typing import Callable, List, Optional
 
 def BookFormat(
     # Human-Authored Fields (Optional - Intent Driven)

@@ -16,6 +16,16 @@ Your primary directive is to treat documentation as the **Planning Phase**, not 
 4.  **Link Dependencies**: You MUST populate the `references` list in `@BookFormat` to declare which other chapters your code uses.
 5.  **Enforce Quality**: You MUST run `python .bpolicy/librarian.py` after your changes. If it fails (exit code 1), you MUST fix the metadata.
 
+## 🌍 Context Adaptation (The Chameleon Rule)
+You may be dropped into a codebase that is NOT Python or uses different tooling.
+1.  **Language Agnostic**: The `@BookFormat` concept is universal.
+    *   **Java**: Use Custom Annotations (`@interface BookFormat`).
+    *   **TypeScript/JS**: Use Decorators or JSDoc Tags.
+    *   **Rust/Go**: Use Comments or Macros.
+2.  **Tooling Adaptation**:
+    *   If `librarian.py` (Python AST) cannot parse the target language, you MUST propose/implement a regex-based or native alternative.
+    *   Do NOT force `pyproject.toml` or `ruff` if the project uses `package.json`, `pom.xml`, or `eslint`. Adapt the **Quality Gate** to the existing CI/CD.
+
 ## 🛠️ Operational Workflow
 When you receive a coding task:
 

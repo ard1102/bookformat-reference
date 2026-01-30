@@ -57,9 +57,28 @@ This guide explains how to integrate the BookFormat protocol into your project.
 
 ---
 
-## 🤖 Configuring Your AI Agent
+## 🧹 Cleanup (Post-Adoption)
 
-To get the most out of BookFormat, you need to tell your AI Agent how to behave.
+Once you have copied `.bpolicy/` and `SUMMARY.md` to your project, you can remove the reference artifacts.
+
+**Safe to Delete:**
+*   `pyproject.toml` (Unless you want to use our Ruff config)
+*   `inventory_sync/` (Demo Code)
+*   `examples/` (Demo Code)
+*   `.gitignore` (Use your own)
+
+**Command:**
+```bash
+# Linux/Mac
+rm -rf inventory_sync examples pyproject.toml .gitignore
+
+# Windows (PowerShell)
+Remove-Item -Recurse -Force inventory_sync, examples, pyproject.toml, .gitignore
+```
+
+**MUST KEEP:**
+*   `.bpolicy/` (The Engine)
+*   `SUMMARY.md` (The Map)
 
 **System Prompt Injection:**
 Add the contents of `AGENT_RULES.md` and `AGENT_WORKFLOW.md` to your Agent's "Custom Instructions" or "System Prompt".

@@ -65,7 +65,7 @@ See [.bpolicy/HOW_TO_ADOPT.md](.bpolicy/HOW_TO_ADOPT.md) for a detailed migratio
 
 2.  **Run the Librarian**
     ```bash
-    python librarian.py
+    python .bpolicy/librarian.py
     ```
     *Check `SUMMARY.md` and `SYSTEM_GRAPH.md` to see the results.*
 

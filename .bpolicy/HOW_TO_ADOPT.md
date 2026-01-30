@@ -23,7 +23,7 @@ This guide explains how to integrate the BookFormat protocol into your project.
 
 4.  **Run the Librarian**:
     ```bash
-    python librarian.py
+    python .bpolicy/librarian.py
     ```
     You now have a `SUMMARY.md` and `SYSTEM_GRAPH.md`.
 
@@ -80,7 +80,7 @@ To enforce the protocol, add a check to your GitHub Actions / GitLab CI. The Lib
 ```yaml
 steps:
   - name: Run Librarian (Quality Gate)
-    run: python librarian.py
+    run: python .bpolicy/librarian.py
     # Fails immediately if docs are broken
 
   - name: Check for Uncommitted Changes

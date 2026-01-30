@@ -2,6 +2,7 @@ import ast
 import os
 import re
 import sys
+import subprocess
 from datetime import datetime
 from typing import Dict, List, Optional
 
@@ -10,6 +11,7 @@ PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 SUMMARY_FILE = os.path.join(PROJECT_ROOT, "SUMMARY.md")
 GRAPH_FILE = os.path.join(PROJECT_ROOT, "SYSTEM_GRAPH.md")
 BOOK_CORE_FILE = "book_core.py"
+SEMGREP_CONFIG = ".semgrep.yml"
 
 # --- Data Structures ---
 class BookEntry:
@@ -42,7 +44,7 @@ class Librarian:
         print(f"📖 Librarian scanning: {self.root_dir}")
         for root, _, files in os.walk(self.root_dir):
             for file in files:
-                if file.endswith(".py") and file != BOOK_CORE_FILE and file != "librarian.py":
+                if file.endswith(".py") and file != BOOK_CORE_FILE and "librarian.py" not in file:
                     self._parse_file(os.path.join(root, file))
         
         # Sort by page number for history, then chapter/subtopic for index
@@ -240,6 +242,14 @@ if __name__ == "__main__":
         print("\n⛔ Build Failed: Documentation integrity compromised.")
         sys.exit(1)
         
+    # Run Security Scan
+    lib.run_security_scan()
+    if lib.errors:
+        print("\n❌ SECURITY VIOLATIONS FOUND:")
+        for e in lib.errors:
+            print(f" - {e}")
+        sys.exit(1)
+
     success_summary = lib.generate_summary()
     success_graph = lib.generate_graph()
     

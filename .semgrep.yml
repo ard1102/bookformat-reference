@@ -1,0 +1,21 @@
+rules:
+  - id: python-no-eval
+    patterns:
+      - pattern: eval(...)
+    message: "Avoid using eval() as it can lead to arbitrary code execution."
+    languages: [python]
+    severity: ERROR
+
+  - id: bookformat-missing-security-annotation
+    patterns:
+      - pattern: |
+          @BookFormat(..., status="Secured", ...)
+          def $FUNC(...):
+            ...
+      - pattern-not: |
+          @BookFormat(..., security_level="High", ...)
+          def $FUNC(...):
+            ...
+    message: "Secured functions MUST specify a security_level."
+    languages: [python]
+    severity: WARNING

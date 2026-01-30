@@ -1,4 +1,4 @@
-from book_core import BookFormat
+from .bpolicy.book_core import BookFormat
 
 # Chapter 0: Foundations
 # Defines shared primitives used by the business logic.

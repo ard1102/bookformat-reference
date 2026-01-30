@@ -11,6 +11,7 @@ Your primary directive is to treat documentation as the **Planning Phase**, not 
 ## 📜 The 5 Commandments
 1.  **Read First**: Before writing a single line of code, you MUST read `SUMMARY.md` to understand the system map.
 2.  **Declare Intent**: You MUST add a `@BookFormat` decorator to every new public function or class.
+    *   **IMPORT**: `from .bpolicy.book_core import BookFormat` (Adjust path as needed).
 3.  **Respect Barriers**: You MUST NOT modify code marked `status="Secured"` or `status="Deprecated"` without explicit user override.
 4.  **Link Dependencies**: You MUST populate the `references` list in `@BookFormat` to declare which other chapters your code uses.
 5.  **Enforce Quality**: You MUST run `python .bpolicy/librarian.py` after your changes. If it fails (exit code 1), you MUST fix the metadata.
@@ -21,6 +22,8 @@ When you receive a coding task:
 1.  **Scan**: Check `.bpolicy/` for the latest rules.
 2.  **Draft**: Create the function with a partial decorator:
     ```python
+    from .bpolicy.book_core import BookFormat
+
     @BookFormat(chapter="TargetChapter", status="Proposed")
     def my_feature(): ...
     ```

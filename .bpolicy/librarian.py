@@ -7,11 +7,11 @@ from datetime import datetime
 from typing import Dict, List, Optional
 
 # --- Configuration ---
-PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
+PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__))) # Root is one level up now
 SUMMARY_FILE = os.path.join(PROJECT_ROOT, "SUMMARY.md")
 GRAPH_FILE = os.path.join(PROJECT_ROOT, "SYSTEM_GRAPH.md")
-BOOK_CORE_FILE = "book_core.py"
-SEMGREP_CONFIG = ".semgrep.yml"
+BOOK_CORE_FILE = os.path.join(PROJECT_ROOT, ".bpolicy", "book_core.py")
+SEMGREP_CONFIG = os.path.join(PROJECT_ROOT, ".bpolicy", "semgrep.yml")
 
 # --- Data Structures ---
 class BookEntry:

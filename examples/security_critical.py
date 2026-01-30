@@ -1,4 +1,4 @@
-from book_core import BookFormat
+from .bpolicy.book_core import BookFormat
 
 # Scenario 3: The Security Barrier
 # This file represents "High Value" code. 

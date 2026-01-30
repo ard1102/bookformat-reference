@@ -1,4 +1,4 @@
-from book_core import BookFormat
+from .bpolicy.book_core import BookFormat
 
 # Scenario 1: The Vibe Coder
 # The human just wants to write code. They don't care about page numbers or boilerplate.

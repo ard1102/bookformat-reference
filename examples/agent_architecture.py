@@ -1,4 +1,4 @@
-from book_core import BookFormat
+from .bpolicy.book_core import BookFormat
 
 # Scenario 2: The Agent Architect
 # An AI agent is asked to build a complex payment subsystem.

@@ -1,4 +1,4 @@
-from book_core import BookFormat
+from .bpolicy.book_core import BookFormat
 from .foundations import RetryPolicy
 
 # Chapter 1: InventorySync
